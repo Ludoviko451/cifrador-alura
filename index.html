@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="contenedor">
+
+    <h4>Ingrese el texto que desea cifrar o el que sea Descifrar</h4>
+    <input type="text" id="texto">
+    
+    <button class="cifrar" onclick="cifrar()">Cifrar</button>
+
+
+    <button class="descifrar" onclick="descifrar()">Descifrar</button>
+
+
+    <script src="encriptador.js" defer></script>
+    </div>
+
+    
+    <div id = "contenedor-oculto" class="contenedor-oculto">
+        <p class="titulo"></p>
+        <p class="texto-cifrado"></p>
+    </div>
+</body>
+</html>
