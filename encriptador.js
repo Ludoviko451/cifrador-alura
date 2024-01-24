@@ -4,19 +4,11 @@ let cifradoArreglo = Array.from("♀!<0♪1>2/5?3;6:4]7}9[8{√=±+→-_←)↑(
 
 abecedario.push(" ")
 cifradoArreglo.push("☼")
-console.log(abecedario)
-console.log(cifradoArreglo)
 
 let cifrado = "";
 let palabra = ""
 let palabraLongitud = 0
-
-
-
 let textoDescifrado = ""
-
-
-
 
 const cifrar = function() {
    
@@ -37,21 +29,33 @@ const cifrar = function() {
     }
 
 
-    let campoCifrado = document.getElementsByClassName("texto-cifrado")
+    let campoCifrado = document.getElementById("texto-cifrado")
     let titulo = document.getElementsByClassName("titulo")
     
     
     let contenedorOculto = document.getElementById("contenedor-oculto")
 
     if (contenedorOculto.className == "contenedor"){
-        campoCifrado[0].textContent = cifrado
+        campoCifrado.textContent = cifrado
     }
     else{
         contenedorOculto.className = "contenedor"
         titulo[0].textContent = "Texto Cifrado"
-        campoCifrado[0].textContent = cifrado
+        campoCifrado.textContent = cifrado
     }
 
+    const existeBoton = document.getElementById("botonCopiar")
+
+    if (existeBoton == null) {
+        const nuevoBoton = document.createElement("button")
+        nuevoBoton.textContent = "Copiar Texto";
+        nuevoBoton.id = "botonCopiar"
+        nuevoBoton.onclick = copiar;
+        campoCifrado.insertAdjacentElement("afterend", nuevoBoton)
+    }
+
+    
+    existeBoton.textContent = "Copiar Texto"
     cifrado = ""
 }
 
@@ -63,8 +67,6 @@ const descifrar = function() {
     for (let j = 0; j < cifrado.length; j++) {
         for (let i = 0; i < cifradoArreglo.length; i++) {
     
-        
-    
           if (cifrado[j] == cifradoArreglo[i] ){
 
             textoDescifrado += abecedario[i];
@@ -73,21 +75,47 @@ const descifrar = function() {
 
     }
 
-    let campoCifrado = document.getElementsByClassName("texto-cifrado")
+    let campoCifrado = document.getElementById("texto-cifrado")
     let titulo = document.getElementsByClassName("titulo")
     
     let contenedorOculto = document.getElementById("contenedor-oculto")
 
     if (contenedorOculto.className == "contenedor"){
-        campoCifrado[0].textContent = textoDescifrado
+        campoCifrado.textContent = textoDescifrado
     }
     else{ 
     contenedorOculto.className = "contenedor"
   
     titulo[0].textContent = "Texto Descifrado"
-    campoCifrado[0].textContent = textoDescifrado
+    campoCifrado.textContent = textoDescifrado
     }
+    
+    const existeBoton = document.getElementById("botonCopiar")
+
+    if (existeBoton == null) {
+        const nuevoBoton = document.createElement("button")
+        nuevoBoton.textContent = "Copiar Texto";
+        nuevoBoton.id = "botonCopiar"
+        nuevoBoton.onclick = copiar;
+        campoCifrado.insertAdjacentElement("afterend", nuevoBoton)
+    }
+
+    existeBoton.textContent = "Copiar Texto"
+
+
     cifrado = ""
 
 }
 
+const copiar = function () {
+
+
+    let campoCifrado = document.getElementById("texto-cifrado")
+    const botonCopiar = document.getElementById("botonCopiar")
+
+    navigator.clipboard.writeText(campoCifrado.textContent)
+
+    
+    botonCopiar.textContent = "Texto Copiado"
+    alert("Texto Copiado al Portapapeles")
+}
