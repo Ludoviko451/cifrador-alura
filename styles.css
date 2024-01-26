@@ -1,6 +1,11 @@
+body {
+    background-color: cadetblue;
+}
+
 .contenedor {
     display: flex;
     align-items: center;
+    background-color: aquamarine;
     justify-content: center;
     flex-direction: column;
     width: 400px;
@@ -24,4 +29,22 @@ button {
 
 .descifrar {
     background-color: pink;
+}
+
+.contenedor-padre {
+    display: flex;
+    flex-direction: column;
+}
+
+#botonEliminar {
+    background-color: red;
+}
+
+#botonCopiar {
+    background-color: green;
+}
+
+.titulo {
+    font-weight: bold;
+    font-size: 20px;
 }

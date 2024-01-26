@@ -28,36 +28,58 @@ const cifrar = function() {
         }
     }
 
+    let nuevoDiv = document.createElement("div")
+    let titulo = document.createElement("p")
+    let textoCifrado = document.createElement("p")
 
-    let campoCifrado = document.getElementById("texto-cifrado")
-    let titulo = document.getElementsByClassName("titulo")
-    
-    
+    titulo.className = "titulo"
+  
+
     let contenedorOculto = document.getElementById("contenedor-oculto")
 
-    if (contenedorOculto.className == "contenedor"){
-        campoCifrado.textContent = cifrado
+    if (contenedorOculto.className == "contenedor-padre"){
+        contenedorOculto.appendChild(nuevoDiv)
+        nuevoDiv.appendChild(titulo)
+        nuevoDiv.appendChild(textoCifrado)
+        nuevoDiv.className = "contenedor"
+        textoCifrado.textContent = cifrado
+        titulo.textContent = "Texto Cifrado"
     }
     else{
-        contenedorOculto.className = "contenedor"
-        titulo[0].textContent = "Texto Cifrado"
-        campoCifrado.textContent = cifrado
+
+        contenedorOculto.appendChild(nuevoDiv)
+        nuevoDiv.appendChild(titulo)
+        nuevoDiv.appendChild(textoCifrado)
+        nuevoDiv.className = "contenedor"
+        textoCifrado.textContent = cifrado
+        contenedorOculto.className = "contenedor-padre"
+        titulo.textContent = "Texto Cifrado"
     }
 
-    const existeBoton = document.getElementById("botonCopiar")
+   
+    const nuevoBoton = document.createElement("button")
+    nuevoBoton.textContent = "Copiar Texto";
+    nuevoBoton.id = "botonCopiar"
+    nuevoBoton.onclick = function() {
+        copiar(textoCifrado.textContent);
+    };
+    nuevoDiv.appendChild(nuevoBoton)
+   
+    const botonEliminar = document.createElement("button")
 
-    if (existeBoton == null) {
-        const nuevoBoton = document.createElement("button")
-        nuevoBoton.textContent = "Copiar Texto";
-        nuevoBoton.id = "botonCopiar"
-        nuevoBoton.onclick = copiar;
-        campoCifrado.insertAdjacentElement("afterend", nuevoBoton)
+    botonEliminar.textContent = "Eliminar"
+    botonEliminar.id = "botonEliminar"
+
+    botonEliminar.onclick = function () {
+        eliminar(nuevoDiv);
     }
+    nuevoDiv.appendChild(botonEliminar)
 
-    
-    existeBoton.textContent = "Copiar Texto"
     cifrado = ""
 }
+
+    
+
 
 const descifrar = function() {
 
@@ -75,47 +97,69 @@ const descifrar = function() {
 
     }
 
-    let campoCifrado = document.getElementById("texto-cifrado")
-    let titulo = document.getElementsByClassName("titulo")
-    
+    let nuevoDiv = document.createElement("div")
+    let titulo = document.createElement("p")
+    let textoCifrado = document.createElement("p")
+
+    titulo.className = "titulo"
+  
+
     let contenedorOculto = document.getElementById("contenedor-oculto")
 
-    if (contenedorOculto.className == "contenedor"){
-        campoCifrado.textContent = textoDescifrado
+    if (contenedorOculto.className == "contenedor-padre"){
+        contenedorOculto.appendChild(nuevoDiv)
+        nuevoDiv.appendChild(titulo)
+        nuevoDiv.appendChild(textoCifrado)
+        nuevoDiv.className = "contenedor"
+        textoCifrado.textContent = textoDescifrado
+        titulo.textContent = "Texto Descifrado"
     }
-    else{ 
-    contenedorOculto.className = "contenedor"
-  
-    titulo[0].textContent = "Texto Descifrado"
-    campoCifrado.textContent = textoDescifrado
-    }
-    
-    const existeBoton = document.getElementById("botonCopiar")
+    else{
 
-    if (existeBoton == null) {
-        const nuevoBoton = document.createElement("button")
-        nuevoBoton.textContent = "Copiar Texto";
-        nuevoBoton.id = "botonCopiar"
-        nuevoBoton.onclick = copiar;
-        campoCifrado.insertAdjacentElement("afterend", nuevoBoton)
+        contenedorOculto.appendChild(nuevoDiv)
+        nuevoDiv.appendChild(titulo)
+        nuevoDiv.appendChild(textoCifrado)
+        nuevoDiv.className = "contenedor"
+        textoCifrado.textContent = textoDescifrado
+        contenedorOculto.className = "contenedor-padre"
+        titulo.textContent = "Texto Descifrado"
     }
 
-    existeBoton.textContent = "Copiar Texto"
+   
+    const nuevoBoton = document.createElement("button")
+    nuevoBoton.textContent = "Copiar Texto";
+    nuevoBoton.id = "botonCopiar"
+    nuevoBoton.onclick = function() {
+        copiar(textoCifrado.textContent);
+    };
+    nuevoDiv.appendChild(nuevoBoton)
 
+    const botonEliminar = document.createElement("button")
 
-    cifrado = ""
+    botonEliminar.textContent = "Eliminar"
+    botonEliminar.id = "botonEliminar"
 
+    botonEliminar.onclick = function () {
+        eliminar(nuevoDiv);
+    }
+    nuevoDiv.appendChild(botonEliminar)
+
+    textoCifrado = ""
 }
 
-const copiar = function () {
+const copiar = function (contenido) {
 
 
-    let campoCifrado = document.getElementById("texto-cifrado")
-    const botonCopiar = document.getElementById("botonCopiar")
 
-    navigator.clipboard.writeText(campoCifrado.textContent)
+
+    navigator.clipboard.writeText(contenido)
 
     
-    botonCopiar.textContent = "Texto Copiado"
     alert("Texto Copiado al Portapapeles")
+}
+
+const eliminar = function (div) {
+    
+    div.remove();
+    alert("Ha sido eliminado con exito")
 }
