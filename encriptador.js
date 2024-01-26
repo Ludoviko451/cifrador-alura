@@ -10,6 +10,7 @@ let palabra = ""
 let palabraLongitud = 0
 let textoDescifrado = ""
 
+
 const cifrar = function() {
    
     
@@ -55,14 +56,22 @@ const cifrar = function() {
         contenedorOculto.className = "contenedor-padre"
         titulo.textContent = "Texto Cifrado"
     }
+    
+    const enviar = cifrado
 
-   
     const nuevoBoton = document.createElement("button")
     nuevoBoton.textContent = "Copiar Texto";
     nuevoBoton.id = "botonCopiar"
-    nuevoBoton.onclick = function() {
-        copiar(textoCifrado.textContent);
-    };
+    nuevoBoton.addEventListener("click", async function() {
+
+        try {
+            console.log(enviar)
+            await  copiar(enviar);
+            console.log("Texto copiado al portapapeles");
+        } catch (error) {
+            console.error("Error al copiar al portapapeles:", error);
+        }
+    });
     nuevoDiv.appendChild(nuevoBoton)
    
     const botonEliminar = document.createElement("button")
@@ -129,9 +138,16 @@ const descifrar = function() {
     const nuevoBoton = document.createElement("button")
     nuevoBoton.textContent = "Copiar Texto";
     nuevoBoton.id = "botonCopiar"
-    nuevoBoton.onclick = function() {
-        copiar(textoCifrado.textContent);
-    };
+    nuevoBoton.addEventListener("click", async function() {
+
+        try {
+            console.log(textoDescifrado)
+            await  copiar(textoDescifrado);
+            console.log("Texto copiado al portapapeles");
+        } catch (error) {
+            console.error("Error al copiar al portapapeles:", error);
+        }
+    });
     nuevoDiv.appendChild(nuevoBoton)
 
     const botonEliminar = document.createElement("button")
@@ -153,7 +169,7 @@ const copiar = function (contenido) {
 
 
     navigator.clipboard.writeText(contenido)
-
+    
     
     alert("Texto Copiado al Portapapeles")
 }
